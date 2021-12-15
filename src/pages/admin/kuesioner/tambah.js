@@ -101,7 +101,7 @@ export default function KuesionerTambah({ add_kuesioner }) {
 		<Row>
 			<Col xs={{ span: 22, offset: 1 }} lg={{ span: 20, offset: 2 }}>
 				<div style={{ margin: "30px 0" }}>
-					<h1>Kuesioner Baru {kuesionerId}</h1>
+					<h1>Kuesioner Baru</h1>
 					<p>Silahkan lengkapi form dibawah ini</p>
 				</div>
 				<div>

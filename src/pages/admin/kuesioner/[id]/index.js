@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { withIronSession } from "next-iron-session";
 import sessionConfig from "@/configs/session.config";
@@ -14,11 +15,12 @@ import {
 	Row, 
 	Col,
 	Button,
-	
+	message
 } from 'antd';
 import {
 	ArrowLeftOutlined,
 	PrinterOutlined,
+	DeleteOutlined,
 	ReloadOutlined
 } from '@ant-design/icons';
 
@@ -48,6 +50,8 @@ export default function KuesionerAnalisis({ admin, isError, id_kuesioner }) {
 	const [data, setData] = useState({})
 	const [dataKartesius, setDataKartesius] = useState([])
 	const [loading, setLoading] = useState(false)
+
+	const router = useRouter();
 	
 	useEffect(() => {
 		fetchData();
@@ -66,6 +70,19 @@ export default function KuesionerAnalisis({ admin, isError, id_kuesioner }) {
 			setLoading(false)
 		})
 	}
+
+	const removeKuesioner = async () => {
+		const response = await fetch(`/api/kuesioner/${id_kuesioner}/delete`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({id_kuesioner})
+		});
+		if (response.ok) {
+			return router.push(`/admin/`);
+		} else {
+			message.error('Ada kesalahan saat menghapus kuesioner!')
+		}
+	}
 	
 	return (<>
 		<div className="container">
@@ -83,6 +100,7 @@ export default function KuesionerAnalisis({ admin, isError, id_kuesioner }) {
 							<p>{!_.isEmpty(data) && moment(data.kuesioner.start_date).format('DD-MM-YYYY')} s/d {!_.isEmpty(data) && moment(data.kuesioner.end_date).format('DD-MM-YYYY')}</p>
 						</div>
 						<div>
+							<Button type="danger" icon={<DeleteOutlined />} onClick={removeKuesioner} loading={loading}></Button> &nbsp;
 							<Button type="primary" icon={<ReloadOutlined />} onClick={fetchData} loading={loading}></Button> &nbsp;
 							<Button type="primary" icon={<PrinterOutlined />} onClick={() => window.print()} >Cetak Laporan</Button>
 						</div>
