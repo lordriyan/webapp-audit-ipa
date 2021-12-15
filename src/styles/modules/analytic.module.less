@@ -1,0 +1,44 @@
+.graph {
+	display: flex;
+	justify-content: center;
+	
+	@media (min-width: @screen-xl) {
+		justify-content: flex-start;
+    }
+}
+.pernyataan {
+	@media (min-width: @screen-xl) {
+		margin-left: 50px;
+	}
+	th, td {
+		padding: 5px 0;
+		border: 1px solid #ddd;
+		
+		&:nth-child(1) {
+			text-align: center;
+		}
+		&:nth-child(2) {
+			padding: 0 15px;
+		}
+		
+	}
+}
+.customList {
+	ul {
+		list-style: none;
+		margin: 0;
+	}
+	ul li::before {
+		content: "\2022";
+		font-weight: bolder;
+		display: inline-block; 
+		width: 1em;
+		margin-left: -1em;
+	}
+	ul li:nth-child(1)::before {
+		color: #0088FE;
+	}
+	ul li:nth-child(2)::before {
+		color: #f06292;
+	}
+}

@@ -1,0 +1,22 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+}
+.make-container(@val) {
+    @media (min-width: @val) {
+        .container {
+            max-width: @val;
+        }
+    }
+}
+// .make-container(@screen-xs);
+// .make-container(@screen-sm);
+// .make-container(@screen-md);
+// .make-container(@screen-lg);
+// .make-container(@screen-xl);
+.make-container(@screen-xxl);
