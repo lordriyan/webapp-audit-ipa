@@ -72,7 +72,7 @@ export default function AdminHome({ adminSession, admin }) {
 			<Row>
 				<Col xs={{ span: 22, offset: 1 }} lg={{ span: 20, offset: 2 }}>
 					<div style={{ margin: "30px 0" }}>
-						<h1>Hi {admin.nama}! <br />Selamat Datang di Admin Panel</h1>
+						<h1>Hi {admin.username}! <br />Selamat Datang di Admin Panel</h1>
 						<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: "10px" }}>
 							<div>Silahkan pilih kuesioner atau buat baru untuk lanjut</div>
 							<div>
@@ -183,7 +183,7 @@ export const getServerSideProps = withIronSession(
 			}
 		
 		const data = await excuteQuery({
-			query: 'SELECT nama, username FROM tb_admin WHERE id_admin = ?',
+			query: 'SELECT username FROM tb_admin WHERE id_admin = ?',
 			values: [adminSession.id_admin],
 		});
 
