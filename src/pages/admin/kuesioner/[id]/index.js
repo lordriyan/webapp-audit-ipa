@@ -49,6 +49,7 @@ export default function KuesionerAnalisis({ admin, isError, id_kuesioner }) {
 
 	const [data, setData] = useState({})
 	const [dataKartesius, setDataKartesius] = useState([])
+	const [dataKartesiusMod, setDataKartesiusMod] = useState([]);
 	const [loading, setLoading] = useState(false)
 
 	const router = useRouter();
@@ -70,6 +71,18 @@ export default function KuesionerAnalisis({ admin, isError, id_kuesioner }) {
 			setLoading(false)
 		})
 	}
+
+	useEffect(() => {
+		let a = dataKartesius.map(item => {
+			return {
+				x: item.x - _.sumBy(dataKartesius, 'x') / dataKartesius.length,
+				y: item.y - _.sumBy(dataKartesius, 'y') / dataKartesius.length,
+				atribut: item.atribut
+			}
+		})
+		setDataKartesiusMod(a);
+	}, [dataKartesius]);
+	
 
 	const removeKuesioner = async () => {
 		const response = await fetch(`/api/kuesioner/${id_kuesioner}/delete`, {
@@ -184,18 +197,18 @@ export default function KuesionerAnalisis({ admin, isError, id_kuesioner }) {
 										<div className={style.graph}>
 											<div>
 												{
-													!_.isEmpty(dataKartesius) && <ScatterChart
+													!_.isEmpty(dataKartesiusMod) && <ScatterChart
 														width={500}
 														height={400}
 													>
 														<CartesianGrid />
-														<XAxis type="number" dataKey="x" />
+														<XAxis type="number" dataKey="x" display={false} name="X" unit="cm" />
 														<YAxis type="number" dataKey="y" />
-														<Scatter name="Kepuasan" data={dataKartesius} fill="#dddddd">
+														<Scatter name="Kepuasan" data={dataKartesiusMod} fill="#ffffff">
 															<LabelList dataKey="atribut" style={{ pointerEvents: "none" }} />
 														</Scatter>
-														<ReferenceLine y={_.sumBy(dataKartesius, 'y') / dataKartesius.length} stroke="#333333" strokeDasharray="3 3" />
-														<ReferenceLine x={_.sumBy(dataKartesius, 'x') / dataKartesius.length} stroke="#333333" strokeDasharray="3 3" />
+														<ReferenceLine y={0} stroke="#333333" strokeDasharray="3 3" />
+														<ReferenceLine x={0} stroke="#333333" strokeDasharray="3 3" />
 													</ScatterChart>
 												}
 											</div>
@@ -225,7 +238,7 @@ export default function KuesionerAnalisis({ admin, isError, id_kuesioner }) {
 															<td>{item.pernyataan}</td>
 															<td align="center">{item.harapan}</td>
 															<td align="center">{item.kinerja}</td>
-															<td align="center">{item.kinerja != 0 && item.harapan != 0 ? ((item.kinerja / item.harapan) * 100).toFixed(0) : 0}%</td>
+															<td align="center">{item.kinerja != 0 && item.harapan != 0 ? ((item.kinerja / item.harapan) * 100).toFixed(3) : 0}%</td>
 														</tr>
 													)
 												}
@@ -238,7 +251,7 @@ export default function KuesionerAnalisis({ admin, isError, id_kuesioner }) {
 														!_.isEmpty(data) 
 															&& (_.sumBy(data.pernyataan, 'harapan')) != 0 
 															&& (_.sumBy(data.pernyataan, 'kinerja')) != 0 
-																? (((_.sumBy(data.pernyataan, 'kinerja')) / (_.sumBy(data.pernyataan, 'harapan'))) * 100).toFixed(0) 
+																? (((_.sumBy(data.pernyataan, 'kinerja')) / (_.sumBy(data.pernyataan, 'harapan'))) * 100).toFixed(3) 
 																: 0 }%</th>
 												</tr>
 											</tbody>
