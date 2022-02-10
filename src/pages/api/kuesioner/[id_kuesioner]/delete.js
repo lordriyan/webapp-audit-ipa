@@ -32,25 +32,37 @@ export default withIronSession(
 
 			// Hapus di tb_jawaban
 				const result0 = await excuteQuery({
-					query: 'DELETE j FROM tb_jawaban j LEFT JOIN tb_pernyataan p ON j.id_pernyataan = p.id_pernyataan WHERE p.id_kuesioner = ?',
+					query: `DELETE j 
+							  FROM tb_jawaban j 
+							LEFT 
+							  JOIN tb_pernyataan p 
+							    ON j.id_pernyataan = p.id_pernyataan 
+							 WHERE p.id_kuesioner = ?`,
 					values: [id_kuesioner],
 				});
 
 			// Hapus di tb_responden
 				const result1 = await excuteQuery({
-					query: `DELETE FROM tb_responden WHERE id_responden IN ${listr}`,
+					query: `DELETE 
+							  FROM tb_responden 
+							 WHERE id_responden 
+							 	IN ${listr}`,
 					values: [],
 				})
 
 			// Hapus di tb_pernyataan
 				const result2 = await excuteQuery({
-					query: 'DELETE FROM tb_pernyataan WHERE id_kuesioner = ?',
+					query: `DELETE 
+							  FROM tb_pernyataan 
+							 WHERE id_kuesioner = ?`,
 					values: [id_kuesioner],
 				});
 
 			// Hapus di tb_kuesioner
 				const result3 = await excuteQuery({
-					query: 'DELETE FROM tb_kuesioner WHERE id_kuesioner = ?',
+					query: `DELETE 
+							  FROM tb_kuesioner 
+							 WHERE id_kuesioner = ?`,
 					values: [id_kuesioner],
 				});
 

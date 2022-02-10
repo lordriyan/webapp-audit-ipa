@@ -12,7 +12,11 @@ export default withIronSession(
 			const { passcode } = req.body;
 
 			const result = await excuteQuery({
-				query: 'SELECT id_kuesioner FROM tb_kuesioner WHERE id_kuesioner = ? AND passcode = ? LIMIT 1',
+				query: `SELECT id_kuesioner 
+						  FROM tb_kuesioner 
+						 WHERE id_kuesioner = ? 
+						   AND passcode = ? 
+						 LIMIT 1`,
 				values: [id_kuesioner, md5(passcode)],
 			});
 

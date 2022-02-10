@@ -9,7 +9,14 @@ export default withIronSession(
 		if (method === "GET") {
 			if (admin !== undefined && req.session.get("admin") !== undefined) {
 				const result = await excuteQuery({
-					query: 'SELECT id_kuesioner, judul, deskripsi, LENGTH(passcode) as isPass, start_date, end_date FROM tb_kuesioner WHERE publish = 1',
+					query: `SELECT id_kuesioner
+								 , judul
+								 , deskripsi
+								 , LENGTH(passcode) as isPass
+								 , start_date
+								 , end_date
+							  FROM tb_kuesioner 
+							 WHERE publish = 1`,
 					values: [],
 				});
 				res.status(200).json({
@@ -19,7 +26,14 @@ export default withIronSession(
 				});
 			} else {
 				const result = await excuteQuery({
-					query: 'SELECT id_kuesioner, judul, deskripsi, LENGTH(passcode) as isPass FROM tb_kuesioner WHERE publish = 1 AND start_date <= CURDATE() AND end_date >= CURDATE()',
+					query: `SELECT id_kuesioner
+								 , judul
+								 , deskripsi
+								 , LENGTH(passcode) as isPass 
+							  FROM tb_kuesioner 
+							 WHERE publish = 1 
+							   AND start_date <= CURDATE() 
+							   AND end_date >= CURDATE()`,
 					values: [],
 				});
 				res.status(200).json({

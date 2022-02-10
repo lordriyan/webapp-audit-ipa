@@ -11,14 +11,20 @@ export default withIronSession(
 		if (method === "GET") {
 
 			const result1 = await excuteQuery({
-				query: 'SELECT LENGTH(passcode) as private FROM tb_kuesioner WHERE id_kuesioner = ? LIMIT 1',
+				query: `SELECT LENGTH(passcode) as private 
+						  FROM tb_kuesioner 
+						 WHERE id_kuesioner = ? 
+						 LIMIT 1`,
 				values: [id_kuesioner],
 			});
 			let lock = result1[0].private == 0 ? false : true;
 			if (lock && !req.session.get(`kuesioner_${id_kuesioner}`)) return res.status(401).send("");
 
 			const result = await excuteQuery({
-				query: 'SELECT id_pernyataan, pernyataan FROM tb_pernyataan WHERE id_kuesioner = ?',
+				query: `SELECT id_pernyataan
+							 , pernyataan 
+						  FROM tb_pernyataan 
+						 WHERE id_kuesioner = ?`,
 				values: [id_kuesioner],
 			});
 

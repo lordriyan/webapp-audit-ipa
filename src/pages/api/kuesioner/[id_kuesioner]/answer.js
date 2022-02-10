@@ -14,7 +14,10 @@ export default withIronSession(
 			const { responden, answer } = req.body;
 
 			const result1 = await excuteQuery({
-				query: 'SELECT LENGTH(passcode) as private FROM tb_kuesioner WHERE id_kuesioner = ? LIMIT 1',
+				query: `SELECT LENGTH(passcode) as private 
+						  FROM tb_kuesioner 
+						 WHERE id_kuesioner = ? 
+						 LIMIT 1`,
 				values: [id_kuesioner],
 			});
 			let lock = result1[0].private == 0 ? false : true;
@@ -22,7 +25,9 @@ export default withIronSession(
 
 			// tambah ke tb_responden
 			const respondenSql = await excuteQuery({
-				query: 'INSERT INTO tb_responden VALUES (NULL, ?, ?, ?)',
+				query: `INSERT 
+						  INTO tb_responden 
+						VALUES (NULL, ?, ?, ?)`,
 				values: [responden.nama, responden.usia, responden.jenis_kelamin],
 			});
 
@@ -36,7 +41,9 @@ export default withIronSession(
 				})
 
 			// Create sql string
-				let sql = "INSERT INTO tb_jawaban VALUES ";
+				let sql = `INSERT 
+							 INTO tb_jawaban 
+						   VALUES `;
 				_.forEach(id_per, async (id) => {
 					let X = answer[`x_${id}`]
 					let Y = answer[`y_${id}`]

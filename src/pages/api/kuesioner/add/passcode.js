@@ -10,7 +10,10 @@ export default withIronSession(
 		if (method === "POST") {
 			let passcode = (req.body.public) ? "" : md5(req.body.passcode);
 			const result = await excuteQuery({
-				query: 'UPDATE tb_kuesioner SET passcode = ?, publish = 1 WHERE id_kuesioner = ?',
+				query: `UPDATE tb_kuesioner 
+						   SET passcode = ?
+						     , publish = 1 
+						 WHERE id_kuesioner = ?`,
 				values: [passcode, req.session.get("add_kuesioner").id_kuesioner],
 			});
 			console.log(result);

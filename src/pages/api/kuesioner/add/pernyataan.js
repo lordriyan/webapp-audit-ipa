@@ -10,7 +10,9 @@ export default withIronSession(
 		
 		if (method === "POST") {
 			const pernyataans = pernyataan.split("\n");
-			let queryP = "INSERT INTO tb_pernyataan VALUES ";
+			let queryP = `INSERT 
+							INTO tb_pernyataan 
+						  VALUES `;
 			pernyataans.forEach(async (i) => {
 				queryP += `(NULL, '${kuesionerId}', '${i}'),`;
 			})

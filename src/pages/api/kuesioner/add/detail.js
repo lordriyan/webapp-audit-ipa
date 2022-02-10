@@ -15,7 +15,9 @@ export default withIronSession(
 		
 		if (method === "POST") {
 			const result = await excuteQuery({
-				query: 'INSERT INTO tb_kuesioner VALUES (NULL, ?, ?, ?, ?, ?, ?, "", 0)',
+				query: `INSERT 
+						  INTO tb_kuesioner 
+						VALUES (NULL, ?, ?, ?, ?, ?, ?, "", 0)`,
 				values: [id_admin, judul, deskripsi, scale, startDate, endDate],
 			});
 			req.session.set("add_kuesioner", {

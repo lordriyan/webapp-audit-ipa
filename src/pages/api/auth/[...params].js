@@ -17,12 +17,19 @@ export default withIronSession(
 				const { username, password } = req.body;
 				
 				const result = await excuteQuery({
-					query: 'SELECT * FROM tb_admin WHERE username = ? AND password = ? LIMIT 1',
+					query: `SELECT * 
+							  FROM tb_admin 
+							 WHERE username = ? 
+							   AND password = ? 
+							 LIMIT 1`,
 					values: [username, md5(password)],
 				});
 				if (result.length) {
 					await excuteQuery({
-						query: 'UPDATE tb_admin SET last_login = ? WHERE id_admin = ? LIMIT 1',
+						query: `UPDATE tb_admin 
+								   SET last_login = ? 
+								 WHERE id_admin = ? 
+								 LIMIT 1`,
 						values: [new Date(), result[0].id_admin],
 					});
 					req.session.set("admin", {
@@ -45,12 +52,19 @@ export default withIronSession(
 				const { id_admin } = req.session.get("admin");
 
 				const result = await excuteQuery({
-					query: 'SELECT * FROM tb_admin WHERE id_admin = ? AND password = ? LIMIT 1',
+					query: `SELECT * 
+							  FROM tb_admin 
+							 WHERE id_admin = ? 
+							   AND password = ? 
+							 LIMIT 1`,
 					values: [id_admin, md5(oldPassword)],
 				});
 				if (result.length && newPassword === confirmPassword) {
 					await excuteQuery({
-						query: 'UPDATE tb_admin SET password = ? WHERE id_admin = ? LIMIT 1',
+						query: `UPDATE tb_admin 
+								   SET password = ? 
+								 WHERE id_admin = ? 
+								 LIMIT 1`,
 						values: [md5(newPassword), id_admin],
 					});
 					return res.status(201).send("");
@@ -65,7 +79,11 @@ export default withIronSession(
 				const { id_kuesioner, passcode } = req.body;
 				
 				const result = await excuteQuery({
-					query: 'SELECT * FROM tb_kuesioner WHERE id_kuesioner = ? AND passcode = ? LIMIT 1',
+					query: `SELECT * 
+							  FROM tb_kuesioner 
+							 WHERE id_kuesioner = ? 
+							   AND passcode = ? 
+							 LIMIT 1`,
 					values: [id_kuesioner, md5(passcode)],
 				});
 

@@ -12,7 +12,10 @@ export default withIronSession(
 		// Ambil detail kuesioner
 
 			const dKuesioner = await excuteQuery({
-				query: `SELECT * FROM tb_kuesioner WHERE id_kuesioner = ? LIMIT 1`,
+				query: `SELECT * 
+						  FROM tb_kuesioner 
+						 WHERE id_kuesioner = ? 
+						 LIMIT 1`,
 				values: [id_kuesioner],
 			});
 
@@ -23,12 +26,17 @@ export default withIronSession(
 
 		// Ambil detail responden
 			const oneIdFromPernyataan = await excuteQuery({
-				query: `SELECT id_pernyataan FROM tb_pernyataan WHERE id_kuesioner = ? LIMIT 1`,
+				query: `SELECT id_pernyataan 
+						  FROM tb_pernyataan 
+						 WHERE id_kuesioner = ? 
+						 LIMIT 1`,
 				values: [id_kuesioner],
 			});
 
 			const ambil_total_responden = await excuteQuery({
-				query: `SELECT COUNT(id_responden) as total FROM tb_jawaban WHERE id_pernyataan = ?`,
+				query: `SELECT COUNT(id_responden) as total 
+						  FROM tb_jawaban 
+						 WHERE id_pernyataan = ?`,
 				values: [oneIdFromPernyataan[0].id_pernyataan],
 			});
 			
@@ -45,27 +53,57 @@ export default withIronSession(
 			if (ambil_total_responden[0].total > 0) {
 				
 				const ambil_laki = await excuteQuery({
-					query: `SELECT COUNT(j.id_responden) as total FROM tb_jawaban j INNER JOIN tb_responden r ON j.id_responden = r.id_responden WHERE id_pernyataan = ? AND jenis_kelamin = 'L'`,
+					query: `SELECT COUNT(j.id_responden) as total 
+							  FROM tb_jawaban j 
+							INNER 
+							  JOIN tb_responden r 
+							    ON j.id_responden = r.id_responden 
+							 WHERE id_pernyataan = ? 
+							   AND jenis_kelamin = 'L'`,
 					values: [oneIdFromPernyataan[0].id_pernyataan],
 				});
 
 				const ambil_anak = await excuteQuery({
-					query: `SELECT COUNT(j.id_responden) as total FROM tb_jawaban j INNER JOIN tb_responden r ON j.id_responden = r.id_responden WHERE id_pernyataan = ? AND usia < 18`,
+					query: `SELECT COUNT(j.id_responden) as total 
+							  FROM tb_jawaban j 
+							 INNER 
+							  JOIN tb_responden r 
+							    ON j.id_responden = r.id_responden 
+							 WHERE id_pernyataan = ? 
+							   AND usia < 18`,
 					values: [oneIdFromPernyataan[0].id_pernyataan],
 				});
 
 				const ambil_remaja = await excuteQuery({
-					query: `SELECT COUNT(j.id_responden) as total FROM tb_jawaban j INNER JOIN tb_responden r ON j.id_responden = r.id_responden WHERE id_pernyataan = ? AND usia BETWEEN 18 AND 25`,
+					query: `SELECT COUNT(j.id_responden) as total 
+							  FROM tb_jawaban j 
+							INNER 
+							  JOIN tb_responden r 
+								ON j.id_responden = r.id_responden 
+							 WHERE id_pernyataan = ? 
+							   AND usia BETWEEN 18 AND 25`,
 					values: [oneIdFromPernyataan[0].id_pernyataan],
 				});
 
 				const ambil_dewasa = await excuteQuery({
-					query: `SELECT COUNT(j.id_responden) as total FROM tb_jawaban j INNER JOIN tb_responden r ON j.id_responden = r.id_responden WHERE id_pernyataan = ? AND usia BETWEEN 26 AND 45`,
+					query: `SELECT COUNT(j.id_responden) as total 
+							  FROM tb_jawaban j 
+							INNER 
+							  JOIN tb_responden r 
+							    ON j.id_responden = r.id_responden 
+							 WHERE id_pernyataan = ? 
+							   AND usia BETWEEN 26 AND 45`,
 					values: [oneIdFromPernyataan[0].id_pernyataan],
 				});
 
 				const ambil_lansia = await excuteQuery({
-					query: `SELECT COUNT(j.id_responden) as total FROM tb_jawaban j INNER JOIN tb_responden r ON j.id_responden = r.id_responden WHERE id_pernyataan = ? AND usia >= 46`,
+					query: `SELECT COUNT(j.id_responden) as total 
+							  FROM tb_jawaban j 
+							INNER 
+							  JOIN tb_responden r 
+							    ON j.id_responden = r.id_responden 
+							 WHERE id_pernyataan = ? 
+							   AND usia >= 46`,
 					values: [oneIdFromPernyataan[0].id_pernyataan],
 				});
 
@@ -83,7 +121,16 @@ export default withIronSession(
 		// Ambil detail pernyataan
 
 			const dPernyataan = await excuteQuery({
-				query: `SELECT *, SUM(harapan) as tharapan, SUM(kinerja) as tkinerja FROM tb_pernyataan p LEFT JOIN tb_jawaban j ON p.id_pernyataan = j.id_pernyataan WHERE id_kuesioner = ? GROUP BY p.id_pernyataan`,
+				query: `SELECT *
+							 , SUM(harapan) as tharapan
+							 , SUM(kinerja) as tkinerja 
+						  FROM tb_pernyataan p 
+						LEFT 
+						  JOIN tb_jawaban j 
+						    ON p.id_pernyataan = j.id_pernyataan 
+						 WHERE id_kuesioner = ? 
+						GROUP 
+							BY p.id_pernyataan`,
 				values: [id_kuesioner],
 			});
 
