@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Jan 2022 pada 06.09
+-- Waktu pembuatan: 14 Feb 2022 pada 17.23
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.11
 
@@ -39,7 +39,7 @@ CREATE TABLE `tb_admin` (
 --
 
 INSERT INTO `tb_admin` (`id_admin`, `username`, `password`, `last_login`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '2022-01-25 12:02:03');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '2022-02-11 10:48:20');
 
 -- --------------------------------------------------------
 
@@ -1583,7 +1583,8 @@ CREATE TABLE `tb_kuesioner` (
 --
 
 INSERT INTO `tb_kuesioner` (`id_kuesioner`, `id_admin`, `judul`, `deskripsi`, `scale`, `start_date`, `end_date`, `passcode`, `publish`) VALUES
-(7, 1, 'Analisis Kepuasan Pelanggan', 'Kuesioner ini digunakan untuk mengukur kualitas pelayanan pada Toko Qanaah Karpet', '5', '2021-12-01', '2022-01-31', '', 1);
+(7, 1, 'Analisis Kepuasan Pelanggan', 'Kuesioner ini digunakan untuk mengukur kualitas pelayanan pada Toko Qanaah Karpet', '5', '2021-12-01', '2022-03-31', '', 1),
+(9, 1, 'test 2', 'awdaw', '5', '2022-03-01', '2022-04-30', '', 0);
 
 -- --------------------------------------------------------
 
@@ -1631,7 +1632,9 @@ INSERT INTO `tb_pernyataan` (`id_pernyataan`, `id_kuesioner`, `pernyataan`) VALU
 (54, 7, 'Keramahan dan kesopanan karyawan'),
 (55, 7, 'Komunikasi yang baik antara pelayan dan pelanggan'),
 (56, 7, 'Kemampuan karyawan dalam menjelaskan '),
-(57, 7, 'Perlakuan khusus bagi pelanggan khusus');
+(57, 7, 'Perlakuan khusus bagi pelanggan khusus'),
+(60, 9, 'pernyataan 1'),
+(61, 9, 'pernyataan 2');
 
 -- --------------------------------------------------------
 
@@ -1651,56 +1654,56 @@ CREATE TABLE `tb_responden` (
 --
 
 INSERT INTO `tb_responden` (`id_responden`, `nama`, `usia`, `jenis_kelamin`) VALUES
-(15, 'Dadang Rosikin', 29, 'L'),
-(16, 'Athifa Putri ', 21, 'P'),
-(17, 'Dino', 19, 'L'),
-(18, 'Indah', 19, 'P'),
-(19, 'Rukmini', 38, 'L'),
-(20, 'Jhon Handri', 40, 'L'),
-(21, 'Susanti', 28, 'P'),
-(22, 'Fajar', 27, 'L'),
-(23, 'Sonia', 25, 'P'),
-(24, 'Reynaldi Widyatmo', 27, 'L'),
-(25, 'rini', 25, 'P'),
-(27, 'Yuli', 21, 'P'),
-(28, 'd', 28, 'L'),
-(29, 'd', 28, 'L'),
-(30, 'Antoni Putra', 42, 'L'),
-(31, 'Antoni Putra', 42, 'L'),
-(32, 'adwadw', 37, 'L'),
-(33, 'Ardi Rosadi', 21, 'L'),
-(34, 'acz', 24, 'L'),
-(35, 'Taufik', 22, 'L'),
-(36, 'awdaw', 37, 'L'),
-(37, 'awd', 43, 'L'),
-(38, 'yvubhi', 26, 'P'),
-(39, 'Rahmi', 20, 'P'),
-(40, 'Ibnu Sabil', 24, 'L'),
-(41, 'awdawd', 35, 'L'),
-(42, 'Munir', 57, 'L'),
-(43, 'Qobri', 41, 'L'),
-(44, 'Risma', 71, 'P'),
-(45, 'Deanita', 31, 'P'),
-(46, 'Bobby', 42, 'L'),
-(47, 'Zul', 38, 'L'),
-(48, 'awdawd', 38, 'L'),
-(49, 'Bary', 39, 'L'),
-(50, 'wdawd', 43, 'L'),
-(51, 'Ibnu Jamil', 36, 'L'),
-(52, 'Pizza Hut', 54, 'L'),
-(53, 'awdawd', 34, 'L'),
-(54, 'awdawd', 24, 'L'),
-(55, 'Ahmad', 34, 'L'),
-(56, 'Yudha', 23, 'L'),
-(57, 'Hanie', 42, 'P'),
-(58, 'awdawd', 34, 'L'),
-(59, 'Rizki', 24, 'L'),
-(60, 'awdawd', 33, 'L'),
-(61, 'awdawd', 33, 'L'),
-(62, 'efsefad', 24, 'L'),
-(63, 'efsf', 28, 'L'),
-(64, 'sefsef', 40, 'L'),
-(65, 'hhtth', 37, 'L');
+(15, 'Ismail Pratama', 29, 'L'),
+(16, 'Wildan Rini', 21, 'P'),
+(17, 'Fariz Rizkyananta', 19, 'L'),
+(18, 'Vito Julianne', 19, 'P'),
+(19, 'Agus Prasetyo', 38, 'L'),
+(20, 'Subiarsono', 40, 'L'),
+(21, 'Yola Widyawati', 28, 'P'),
+(22, 'Fandy Firmansyah', 27, 'L'),
+(23, 'Rifat Chairunnisa', 25, 'P'),
+(24, 'Christian Erditya', 27, 'L'),
+(25, 'Yola Rohani', 25, 'P'),
+(27, 'Avicenna Jeni', 21, 'P'),
+(28, 'Nauval Defriyanto', 28, 'L'),
+(29, 'Fajar Chandra', 28, 'L'),
+(30, 'Lukman Tanjung', 42, 'L'),
+(31, 'Gusti Mediarrahman', 42, 'L'),
+(32, 'Mustafid Kresno', 37, 'L'),
+(33, 'Gilang Himawan', 21, 'L'),
+(34, 'Ilham Fajria', 24, 'L'),
+(35, 'Hilman Wiguna', 22, 'L'),
+(36, 'Surya Baskoro', 37, 'L'),
+(37, 'Dhanu Hamdi', 43, 'L'),
+(38, 'Larassati', 26, 'P'),
+(39, 'Arini Larashati', 20, 'P'),
+(40, 'Irsan Kurniansyah', 24, 'L'),
+(41, 'Dwiki Rahma', 35, 'L'),
+(42, 'Sutrisno', 47, 'L'),
+(43, 'Reynard Naenggolan', 41, 'L'),
+(44, 'Fatimah', 34, 'P'),
+(45, 'Derilandry Asyrafi', 31, 'P'),
+(46, 'Agus Idrus', 42, 'L'),
+(47, 'Syahid Pemana', 38, 'L'),
+(48, 'Fauzi Irwanto', 38, 'L'),
+(49, 'Ilyas Umam', 48, 'L'),
+(50, 'Zulfianna', 43, 'L'),
+(51, 'Ekka Naradhipa', 36, 'L'),
+(52, 'Edwin Hadyan', 44, 'L'),
+(53, 'Kevin Faradillah', 34, 'L'),
+(54, 'Daniel Maulana', 24, 'L'),
+(55, 'Finaldi Yuda', 34, 'L'),
+(56, 'Fauzan Destrya', 23, 'L'),
+(57, 'Fatahillah Yati', 42, 'P'),
+(58, 'Azrul Manar', 34, 'L'),
+(59, 'Muhammad Rizky', 24, 'L'),
+(60, 'Azhar Ersyahputra', 33, 'L'),
+(61, 'Yuda Andrianto', 33, 'L'),
+(62, 'Naufal Adi', 24, 'L'),
+(63, 'Bryan Deviyanto', 28, 'L'),
+(64, 'Devito Permana', 40, 'L'),
+(65, 'Taufik Prasetyo', 37, 'L');
 
 --
 -- Indexes for dumped tables
@@ -1753,19 +1756,19 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT untuk tabel `tb_kuesioner`
 --
 ALTER TABLE `tb_kuesioner`
-  MODIFY `id_kuesioner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kuesioner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pernyataan`
 --
 ALTER TABLE `tb_pernyataan`
-  MODIFY `id_pernyataan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_pernyataan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_responden`
 --
 ALTER TABLE `tb_responden`
-  MODIFY `id_responden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id_responden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
