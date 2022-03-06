@@ -30,6 +30,7 @@ Metode yang digunakan adalah metode <b><i>Importance Performance Analysis</i> (I
 	yarn start
 	```
 * Kunjungi [http://localhost:3000](http://localhost:3000) dengan web browser
+* Default Login = admin:admin
 
 ## Terapkan di Vercel
 
