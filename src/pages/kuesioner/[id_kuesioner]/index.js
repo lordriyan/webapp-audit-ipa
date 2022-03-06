@@ -204,14 +204,14 @@ export default function Kuesioner({ id_kuesioner, isUnlock, isError, dataK }) {
 															{
 																scale.map((scale, index) => {
 																	return (<td style={{ textAlign: "center" }} key={index}>
-																		<input type="radio" name={`y_${item.id_pernyataan}`} value={index} onChange={handleChange} required/>
+																		<input type="radio" name={`y_${item.id_pernyataan}`} value={index+1} onChange={handleChange} required/>
 																	</td>)
 																})
 															}
 															{
 																scale.map((scale, index) => {
 																	return (<td style={{ textAlign: "center" }} key={index}>
-																		<input type="radio" name={`x_${item.id_pernyataan}` } value={index} onChange={handleChange} required/>
+																		<input type="radio" name={`x_${item.id_pernyataan}` } value={index+1} onChange={handleChange} required/>
 																	</td>)
 																})
 															}
